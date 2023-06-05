@@ -7,3 +7,4 @@ notebooks/Untitled-1.ipynb
 models/linear_regression/lr.pkl
 models/random_forest/rf_tuning.pkl
 models/random_forest/rf.pkl
+models/support_vector_regression/svr.pkl
