@@ -5,3 +5,5 @@ data/split/x_train.csv
 data/split/y_train.csv
 notebooks/Untitled-1.ipynb
 models/linear_regression/lr.pkl
+models/random_forest/rf_tuning.pkl
+models/random_forest/rf.pkl
