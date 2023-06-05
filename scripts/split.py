@@ -7,8 +7,8 @@ import pandas as ps
 joblib_file = "models/linear_regression/lr.pkl"
 df_full = ps.read_csv('data/preprocessed/train.csv', engine='python', sep=',', on_bad_lines='skip')
 
-df_x_todummy = df_full.drop(['SalePrice','LotShape','LandSlope','ExterQual','ExterCond','BsmtQual','BsmtCond','HeatingQC','KitchenQual','FireplaceQu','GarageFinish','GarageQual','GarageCond','PoolQC','Fence'], axis=1)
-df_x_scale = df_full[['LotShape','LandSlope','ExterQual','ExterCond','BsmtQual','BsmtCond','HeatingQC','KitchenQual','FireplaceQu','GarageFinish','GarageQual','GarageCond','PoolQC','Fence']].copy()
+df_x_todummy = df_full.drop(['SalePrice','LotShape','LandSlope','ExterQual','ExterCond','BsmtQual','BsmtCond','HeatingQC','KitchenQual','FireplaceQu','GarageFinish','GarageQual','GarageCond','Fence'], axis=1)
+df_x_scale = df_full[['LotShape','LandSlope','ExterQual','ExterCond','BsmtQual','BsmtCond','HeatingQC','KitchenQual','FireplaceQu','GarageFinish','GarageQual','GarageCond','Fence']].copy()
 
 
 df_x_scale.loc[df_x_scale['LotShape'] == "Reg", "LotShape"] = "1"
@@ -84,12 +84,6 @@ df_x_scale.loc[df_x_scale['GarageCond'] == "Fa", "GarageCond"] = 4
 df_x_scale.loc[df_x_scale['GarageCond'] == "Po", "GarageCond"] = 5
 df_x_scale.loc[df_x_scale['GarageCond'] == "XX", "GarageCond"] = 0
 
-df_x_scale.loc[df_x_scale['PoolQC'] == "Ex", "PoolQC"] = 1
-df_x_scale.loc[df_x_scale['PoolQC'] == "Gd", "PoolQC"] = 2
-df_x_scale.loc[df_x_scale['PoolQC'] == "TA", "PoolQC"] = 3
-df_x_scale.loc[df_x_scale['PoolQC'] == "Fa", "PoolQC"] = 4
-df_x_scale.loc[df_x_scale['PoolQC'] == "XX", "PoolQC"] = 0
-
 df_x_scale.loc[df_x_scale['Fence'] == "GdPrv", "Fence"] = 1
 df_x_scale.loc[df_x_scale['Fence'] == "MnPrv", "Fence"] = 2
 df_x_scale.loc[df_x_scale['Fence'] == "GdWo", "Fence"] = 3
@@ -101,9 +95,12 @@ df_x_todummy = ps.get_dummies(df_x_todummy)
 df_x = ps.concat([df_x_scale, df_x_todummy], axis=1, join="inner")
 df_y = df_full['SalePrice']
 
+df_full_edited = ps.concat([df_x, df_y], axis=1, join="inner")
+
 x_train, x_test, y_train, y_test = train_test_split(df_x, df_y, test_size = 0.25)
 
 x_train.to_csv('data/split/x_train.csv', index=False)
 x_test.to_csv('data/split/x_test.csv', index=False)
 y_train.to_csv('data/split/y_train.csv', index=False)
 y_test.to_csv('data/split/y_test.csv', index=False)
+df_full_edited.to_csv('data/split/df_full_edited.csv', index=False)

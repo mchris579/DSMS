@@ -150,6 +150,8 @@ def preprocess(df: pd.DataFrame):
 
   df = df.dropna()
   df = df.drop(columns=["Id"])
+  df = df.drop(columns=["PoolArea"])
+  df = df.drop(columns=["PoolQC"])
 
   return df
 
