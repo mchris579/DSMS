@@ -1,1 +1,7 @@
 .DS_Store
+data/split/x_test.csv
+data/split/y_test.csv
+data/split/x_train.csv
+data/split/y_train.csv
+notebooks/Untitled-1.ipynb
+models/linear_regression/lr.pkl
